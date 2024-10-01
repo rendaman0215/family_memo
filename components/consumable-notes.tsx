@@ -32,6 +32,11 @@ export function ConsumableNotesComponent() {
   };
 
   const updateQuantity = (id: number, change: number) => {
+    const target = items.find((item) => item.id === id);
+    if (target && target.quantity + change <= 0) {
+      deleteItem(id);
+      return;
+    }
     setItems(
       items.map((item) =>
         item.id === id
